@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emotional School · Bienestar Infantil</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome 6 (iconos) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Hoja de estilos propia -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <i class="fas fa-heart" style="color: #f6b93b; font-size: 2rem;"></i>
+            <h1>Emotional <span>School</span></h1>
+        </div>
+        <nav>
+            <ul id="nav-menu">
+                <li><a href="#" data-section="inicio"><i class="fas fa-home"></i> Inicio</a></li>
+                <li><a href="#" data-section="registro"><i class="fas fa-user-plus"></i> Registro</a></li>
+                <li><a href="#" data-section="login"><i class="fas fa-sign-in-alt"></i> Iniciar Sesión</a></li>
+                <li><a href="#" data-section="recuperar"><i class="fas fa-key"></i> Recuperar</a></li>
+                <li id="director-link" style="display: none;"><a href="#" data-section="director"><i class="fas fa-chalkboard-teacher"></i> Directores</a></li>
+                <li id="profesor-link" style="display: none;"><a href="#" data-section="profesor"><i class="fas fa-users"></i> Mis Aulas</a></li>
+                <li id="estudiante-link" style="display: none;"><a href="#" data-section="estudiante"><i class="fas fa-smile"></i> Mi Perfil</a></li>
+            </ul>
+        </nav>
+        <div class="user-info" id="user-info">
+            <span id="user-name"></span>
+            <button class="btn-logout" id="logout-btn" style="display: none;"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</button>
+        </div>
+    </header>
+
+    <main>
+        <!-- SECCIÓN INICIO -->
+        <section id="inicio" class="section active">
+            <div class="hero">
+                <div class="hero-text">
+                    <h2>Bienvenidos a Emotional School</h2>
+                    <p>Un espacio diseñado para ayudar a los niños a expresar y gestionar sus emociones de manera divertida y educativa.</p>
+                    <button class="btn btn-secondary" onclick="mostrarSeccion('registro')"><i class="fas fa-star"></i> ¡Regístrate ahora!</button>
+                </div>
+                <div class="hero-image">
+                    <i class="fas fa-child" style="font-size: 12rem; color: #f6b93b;"></i>
+                </div>
+            </div>
+
+            <div class="features">
+                <div class="feature-card">
+                    <i class="fas fa-smile-beam"></i>
+                    <h3>Alegría</h3>
+                    <p>Aprende a reconocer y compartir la alegría.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-sad-tear"></i>
+                    <h3>Tristeza</h3>
+                    <p>Expresa la tristeza de forma saludable.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-angry"></i>
+                    <h3>Enojo</h3>
+                    <p>Controla el enojo con técnicas divertidas.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-fearful"></i>
+                    <h3>Miedo</h3>
+                    <p>Enfrenta tus miedos con valentía.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN REGISTRO (sin opción Director) -->
+        <section id="registro" class="section">
+            <div class="card">
+                <h2><i class="fas fa-user-plus"></i> Registro</h2>
+                <form id="form-registro">
+                    <div class="form-group">
+                        <label for="reg-nombres"><i class="fas fa-user"></i> Nombres completos</label>
+                        <input type="text" id="reg-nombres" placeholder="Ej. Juanito Pérez" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="reg-apellidos"><i class="fas fa-user"></i> Apellidos</label>
+                        <input type="text" id="reg-apellidos" placeholder="Ej. García López" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="reg-correo"><i class="fas fa-envelope"></i> Correo electrónico</label>
+                        <input type="email" id="reg-correo" placeholder="ejemplo@correo.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="reg-pass"><i class="fas fa-lock"></i> Contraseña</label>
+                        <input type="password" id="reg-pass" placeholder="••••••••" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="reg-fecha"><i class="fas fa-calendar-alt"></i> Fecha de nacimiento</label>
+                        <input type="date" id="reg-fecha" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="reg-rol"><i class="fas fa-user-tag"></i> Rol</label>
+                        <select id="reg-rol">
+                            <option value="estudiante">Estudiante</option>
+                            <option value="profesor">Profesor</option>
+                            <!-- Director eliminado -->
+                        </select>
+                    </div>
+                    <button type="submit" class="btn"><i class="fas fa-check"></i> Registrar</button>
+                    <button type="button" class="btn btn-secondary" onclick="mostrarSeccion('login')"><i class="fas fa-sign-in-alt"></i> Ya tengo cuenta</button>
+                </form>
+                <div id="mensaje-registro" class="mensaje"></div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN LOGIN (acepta "Director" como usuario) -->
+        <section id="login" class="section">
+            <div class="card">
+                <h2><i class="fas fa-sign-in-alt"></i> Iniciar Sesión</h2>
+                <form id="form-login">
+                    <div class="form-group">
+                        <label for="login-correo"><i class="fas fa-user"></i> Usuario o correo</label>
+                        <input type="text" id="login-correo" placeholder="ejemplo@correo.com o Director" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="login-pass"><i class="fas fa-lock"></i> Contraseña</label>
+                        <input type="password" id="login-pass" placeholder="••••••••" required>
+                    </div>
+                    <button type="submit" class="btn"><i class="fas fa-arrow-right"></i> Entrar</button>
+                    <button type="button" class="btn btn-secondary" onclick="mostrarSeccion('recuperar')"><i class="fas fa-question-circle"></i> ¿Olvidaste tu contraseña?</button>
+                </form>
+                <div id="mensaje-login" class="mensaje"></div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN RECUPERAR CONTRASEÑA -->
+        <section id="recuperar" class="section">
+            <div class="card">
+                <h2><i class="fas fa-key"></i> Recuperar Contraseña</h2>
+                <p>Ingresa tu correo y te enviaremos un enlace para restablecer tu contraseña.</p>
+                <form id="form-recuperar">
+                    <div class="form-group">
+                        <label for="rec-correo"><i class="fas fa-envelope"></i> Correo electrónico</label>
+                        <input type="email" id="rec-correo" placeholder="ejemplo@correo.com" required>
+                    </div>
+                    <button type="submit" class="btn"><i class="fas fa-paper-plane"></i> Enviar</button>
+                    <button type="button" class="btn btn-secondary" onclick="mostrarSeccion('login')"><i class="fas fa-arrow-left"></i> Volver al login</button>
+                </form>
+                <div id="mensaje-recuperar" class="mensaje"></div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN DIRECTOR -->
+        <section id="director" class="section">
+            <div class="card">
+                <h2><i class="fas fa-chalkboard-teacher"></i> Panel del Director - Usuarios Registrados</h2>
+                <div class="table-container">
+                    <table id="tabla-usuarios-director">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombres</th>
+                                <th>Apellidos</th>
+                                <th>Correo</th>
+                                <th>Fecha Nac.</th>
+                                <th>Rol</th>
+                                <th>Aula</th>
+                                <th>Estado</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody-usuarios-director"></tbody>
+                    </table>
+                </div>
+                <h3><i class="fas fa-door-open"></i> Gestión de Aulas</h3>
+                <button class="btn btn-secondary" onclick="mostrarFormAula()"><i class="fas fa-plus-circle"></i> Crear Nueva Aula</button>
+                <div id="form-aula" style="display: none; margin-top: 1rem;">
+                    <h4>Nueva Aula</h4>
+                    <input type="text" id="aula-nombre" placeholder="Nombre del aula (ej. 1° Básico A)">
+                    <input type="number" id="aula-capacidad" placeholder="Capacidad" value="20" min="1">
+                    <button class="btn" onclick="crearAula()"><i class="fas fa-save"></i> Guardar</button>
+                    <button class="btn btn-secondary" onclick="cancelarFormAula()"><i class="fas fa-times"></i> Cancelar</button>
+                </div>
+                <div id="lista-aulas-director"></div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN PROFESOR -->
+        <section id="profesor" class="section">
+            <div class="card">
+                <h2><i class="fas fa-chalkboard-teacher"></i> Panel del Profesor - Mis Aulas</h2>
+                <div id="aulas-profesor"></div>
+                <hr>
+                <h3><i class="fas fa-user-graduate"></i> Estudiantes sin aula</h3>
+                <div id="estudiantes-libres"></div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN ESTUDIANTE -->
+        <section id="estudiante" class="section">
+            <div class="card">
+                <h2><i class="fas fa-id-card"></i> Mi Perfil</h2>
+                <div id="perfil-estudiante"></div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Emotional School · Todos los derechos reservados · <i class="fas fa-heart" style="color: #f6b93b;"></i> Cuidando las emociones</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
